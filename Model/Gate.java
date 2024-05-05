@@ -9,9 +9,6 @@ public class Gate extends BaseClass{
     private String Operator;
     private GateStatus gateStatus;
 
-    public Gate() {
-    }
-
     public Gate(GateType gateType, int gateNum, String operator, GateStatus gateStatus) {
         this.gateType = gateType;
         this.gateNum = gateNum;

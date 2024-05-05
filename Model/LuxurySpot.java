@@ -4,21 +4,23 @@ import Model.ENUM.ParkingSpotStatus;
 import Model.ENUM.VehicleType;
 
 public class LuxurySpot extends ParkingSpot{
-    private String SecurityGuard;
+    private Staff SecurityGuard;
 
-    public LuxurySpot() {
+
+    public LuxurySpot(Staff securityGuard) {
+        SecurityGuard = securityGuard;
     }
 
-    public LuxurySpot(int spotNo, VehicleType vehicleType, ParkingSpotStatus parkingSpotStatus, Model.Vehicle vehicle, String securityGuard) {
+    public LuxurySpot(int spotNo, VehicleType vehicleType, ParkingSpotStatus parkingSpotStatus, Model.Vehicle vehicle, Staff securityGuard) {
         super(spotNo, vehicleType, parkingSpotStatus, vehicle);
         SecurityGuard = securityGuard;
     }
 
-    public String getSecurityGuard() {
+    public Staff getSecurityGuard() {
         return SecurityGuard;
     }
 
-    public void setSecurityGuard(String securityGuard) {
+    public void setSecurityGuard(Staff securityGuard) {
         SecurityGuard = securityGuard;
     }
 }

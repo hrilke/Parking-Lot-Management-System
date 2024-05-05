@@ -4,22 +4,23 @@ import Model.ENUM.ParkingSpotStatus;
 import Model.ENUM.VehicleType;
 
 public class EVSpot extends ParkingSpot{
-   private int accessCard;
+   private Staff evStationStaff;
 
-   public EVSpot() {
-
+   public EVSpot(Staff evStationStaff) {
+      this.evStationStaff = evStationStaff;
    }
 
-   public EVSpot(int spotNo, VehicleType vehicleType, ParkingSpotStatus parkingSpotStatus, Model.Vehicle vehicle, int accessCard) {
+   public EVSpot(int spotNo, VehicleType vehicleType, ParkingSpotStatus parkingSpotStatus, Model.Vehicle vehicle, Staff evStationStaff) {
       super(spotNo, vehicleType, parkingSpotStatus, vehicle);
-      this.accessCard = accessCard;
+
+      this.evStationStaff = evStationStaff;
    }
 
-   public int getAccessCard() {
-      return accessCard;
+   public Staff getEvStationStaff() {
+      return evStationStaff;
    }
 
-   public void setAccessCard(int accessCard) {
-      this.accessCard = accessCard;
+   public void setEvStationStaff(Staff evStationStaff) {
+      this.evStationStaff = evStationStaff;
    }
 }
