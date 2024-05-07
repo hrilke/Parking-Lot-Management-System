@@ -1,13 +1,14 @@
 package Model;
 
 import Model.ENUM.ParkingSpotStatus;
+import Model.ENUM.StaffSkill;
 import Model.ENUM.VehicleType;
 
 public class HandicapSpot extends ParkingSpot{
    private Staff wheelchairHelper;
-
-   public HandicapSpot(Staff wheelchairHelper) {
-      this.wheelchairHelper = wheelchairHelper;
+   private static int idCounter = 0;
+   public HandicapSpot() {
+      this.wheelchairHelper = new Staff("Helper"+idCounter++, StaffSkill.WHEELCHAIR_STAFF);
    }
 
    public HandicapSpot(int spotNo, VehicleType vehicleType, ParkingSpotStatus parkingSpotStatus, Model.Vehicle vehicle, Staff wheelchairHelper) {

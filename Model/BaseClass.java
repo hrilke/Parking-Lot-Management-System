@@ -9,6 +9,8 @@ public abstract class BaseClass {
     protected LocalDateTime createdAt;
     protected LocalDateTime updatedAt;
 
+
+
     public int getId() {
         return id;
     }

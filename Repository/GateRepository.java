@@ -18,7 +18,7 @@ public class GateRepository {
         }
         return gate;
     }
-    public void put(Gate gate){
+    public void add(Gate gate){
         gateHashMap.put(gate.getId(), gate);
         System.out.println("Gate has been Initialized to the Database");
     }

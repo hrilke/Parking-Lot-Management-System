@@ -1,14 +1,15 @@
 package Model;
 
 import Model.ENUM.ParkingSpotStatus;
+import Model.ENUM.StaffSkill;
 import Model.ENUM.VehicleType;
 
 public class LuxurySpot extends ParkingSpot{
     private Staff SecurityGuard;
 
 
-    public LuxurySpot(Staff securityGuard) {
-        SecurityGuard = securityGuard;
+    public LuxurySpot() {
+        SecurityGuard = new Staff("Security Guard", StaffSkill.SECURITY_STAFF);
     }
 
     public LuxurySpot(int spotNo, VehicleType vehicleType, ParkingSpotStatus parkingSpotStatus, Model.Vehicle vehicle, Staff securityGuard) {

@@ -1,8 +1,9 @@
 package Controller;
 
 import Model.Ticket;
+import Model.Vehicle;
 import Service.TicketService;
-
+import Exception.InvalidEntryDetailsException;
 public class TicketController {
     private TicketService ticketService;
 
@@ -10,7 +11,10 @@ public class TicketController {
         this.ticketService = ticketService;
     }
 
-    public Ticket generateTicket(){
-        return ticketService.generateTicket();
+    public Ticket generateTicket(Vehicle vehicle, int gateId, int parkingLotId){
+        if (gateId <= 0 || parkingLotId <= 0) {
+            throw new InvalidEntryDetailsException("Invalid Entry GateId or Parking Lot Id");
+        }
+        return ticketService.generateTicket(vehicle,gateId,parkingLotId);
     }
 }

@@ -2,17 +2,21 @@ package Model;
 
 import Model.ENUM.GateStatus;
 import Model.ENUM.GateType;
+import Model.ENUM.StaffSkill;
 
 public class Gate extends BaseClass{
     private GateType gateType;
     private int gateNum;
-    private String Operator;
+    private Staff operator;
     private GateStatus gateStatus;
 
-    public Gate(GateType gateType, int gateNum, String operator, GateStatus gateStatus) {
+    public Gate() {
+    }
+
+    public Gate(GateType gateType, int gateNum, GateStatus gateStatus) {
         this.gateType = gateType;
         this.gateNum = gateNum;
-        Operator = operator;
+        operator = new Staff("GateOperator", StaffSkill.GATE_OPERATOR);
         this.gateStatus = gateStatus;
     }
 
@@ -32,12 +36,12 @@ public class Gate extends BaseClass{
         this.gateNum = gateNum;
     }
 
-    public String getOperator() {
-        return Operator;
+    public Staff getOperator() {
+        return operator;
     }
 
-    public void setOperator(String operator) {
-        Operator = operator;
+    public void setOperator(Staff operator) {
+        this.operator = operator;
     }
 
     public GateStatus getGateStatus() {
