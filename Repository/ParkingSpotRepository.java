@@ -13,7 +13,7 @@ public class ParkingSpotRepository {
 
     public void add(ParkingSpot parkingSpot) {
         parkingSpotHashMap.put(parkingSpot.getId(), parkingSpot);
-        System.out.println("Parking Spot Has been initialized to the Database");
+        System.out.println("Parking Spot " + parkingSpot.getSpotNo() + "Has been initialized to the Database");
     }
     public ParkingSpot get(int parkingSpotId){
         ParkingSpot newParkingSpot = parkingSpotHashMap.get(parkingSpotId);

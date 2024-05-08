@@ -2,7 +2,10 @@ package Service.Strategy.SpotAllocationStrategy;
 
 public class SpotAllocationStrategyFactory {
 
-    public SpotAllocationStrategy getSpotAllocationStrategy(SpotAllocationStrategyName spotAllocationStrategyName) {
+    public SpotAllocationStrategyFactory(SpotAllocationStrategyName strategy) {
+    }
+
+    public static SpotAllocationStrategy getSpotAllocationStartegy(SpotAllocationStrategyName spotAllocationStrategyName) {
         switch (spotAllocationStrategyName) {
             case LINEAR : return new LinearSpotAllocation();
             case NEAREST_TO_EXIT: return new NearestToExitSpotAllocation();

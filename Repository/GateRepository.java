@@ -7,7 +7,7 @@ import java.util.HashMap;
 public class GateRepository {
     private HashMap<Integer, Gate> gateHashMap;
 
-    public GateRepository(HashMap<Integer, Gate> gateMap) {
+    public GateRepository() {
         this.gateHashMap = new HashMap<>();
     }
 
@@ -20,6 +20,6 @@ public class GateRepository {
     }
     public void add(Gate gate){
         gateHashMap.put(gate.getId(), gate);
-        System.out.println("Gate has been Initialized to the Database");
+        System.out.println("Gate "+ gate.getGateNum() +" has been Initialized to the Database");
     }
 }

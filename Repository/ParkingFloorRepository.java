@@ -13,7 +13,7 @@ public class ParkingFloorRepository {
 
     public void add(ParkingFloor parkingFloor){
         parkingFloorHashMap.put(parkingFloor.getId(), parkingFloor);
-        System.out.println("Parking Floor has been initialized to the Database");
+        System.out.println("Parking Floor "+parkingFloor.getFloorNo() +" has been initialized to the Database");
     }
 
     public ParkingFloor get(int parkingFloorId){

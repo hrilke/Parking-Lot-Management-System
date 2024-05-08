@@ -1,6 +1,7 @@
 package Model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Ticket extends BaseClass{
     private ParkingSpot parkingSpot;
@@ -9,12 +10,34 @@ public class Ticket extends BaseClass{
 
     private LocalDateTime entryTime;
 
+    private Gate entryGate;
+
     public Ticket(){}
 
-    public Ticket(ParkingSpot parkingSpot, Vehicle vehicle, LocalDateTime entryTime) {
+    public Ticket(ParkingSpot parkingSpot, Vehicle vehicle, LocalDateTime entryTime, Gate entryGate) {
         this.parkingSpot = parkingSpot;
         this.vehicle = vehicle;
         this.entryTime = entryTime;
+        this.entryGate = entryGate;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                ",\nticketId=" + getId() +
+                ", \nparkingSpot=" + parkingSpot +
+                ", \nvehicle=" + vehicle.getRegistrationNumber() +
+                ", \nentryTime=" + DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").format(entryTime) +
+                ", \nentryGate=" + entryGate.getGateNum() +
+                '}';
+    }
+
+    public Gate getEntryGate() {
+        return entryGate;
+    }
+
+    public void setEntryGate(Gate entryGate) {
+        this.entryGate = entryGate;
     }
 
     public ParkingSpot getParkingSpot() {

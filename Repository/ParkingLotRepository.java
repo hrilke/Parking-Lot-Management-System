@@ -16,10 +16,10 @@ public class ParkingLotRepository {
     public void add(ParkingLot parkingLot){
         parkingLot.setId(++idCounter);
         parkingLotHashMap.put(parkingLot.getId(), parkingLot);
-        System.out.println("Parking Lot Has been Initialized to the Database");
+        System.out.println("Parking Lot "+ parkingLot.getName() +" Has been Initialized to the Database");
     }
     public ParkingLot get(int parkingLotId){
-        ParkingLot newParkingLot = get(parkingLotId);
+        ParkingLot newParkingLot = parkingLotHashMap.get(parkingLotId);
         if (newParkingLot == null) {
             throw new ParkingLotNotFoundException("Parking lot not found for id: "+ parkingLotId);
         }
