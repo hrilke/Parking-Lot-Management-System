@@ -1,5 +1,5 @@
 package Model.ENUM;
 
 public enum VehicleType {
-    CAR, BIKE;
+    ELECTRIC, LUXURY, HANDICAPPED, GENERAL
 }

@@ -16,7 +16,8 @@ public class LinearSpotAllocation implements SpotAllocationStrategy{
         for (ParkingFloor parkingFloor : parkingFloorArrayList) {
             for (ParkingSpot parkingSpot : parkingFloor.getSpotList()) {
                 if (parkingSpot.getParkingSpotStatus().equals(ParkingSpotStatus.EMPTY)
-                    && parkingSpot.getVehicleType().equals(vehicle.getVehicleType())) {
+                    && parkingSpot.getVehicleType().equals(vehicle.getVehicleType())
+                    ) {
                     return parkingSpot;
                 }
             }

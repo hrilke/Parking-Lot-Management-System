@@ -15,7 +15,7 @@ public class TicketRepository {
     public Ticket add(Ticket ticket) { //TO DO : Find out Why we need to return ticket after adding
         ticket.setId(++idCounter);
         ticketHashMap.put(ticket.getId(), ticket);
-        System.out.println("Ticket has been added successfully");
+        System.out.println("Collect your ticket");
         return ticketHashMap.get(idCounter);
     }
 

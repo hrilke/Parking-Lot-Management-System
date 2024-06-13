@@ -17,7 +17,8 @@ public class ParkingLot extends BaseClass{
     private SpotAllocationStrategy spotAllocationStrategy;
     private BillCalculationStrategy billCalculationStrategy;
 
-    public ParkingLot() {
+    public ParkingLot(int id) {
+        super();
     }
 
     public ParkingLot(String name, String address, List<ParkingFloor> floorList, List<VehicleType> vehicleTypeList, ParkingLotStatus parkingLotStatus, int capacity, SpotAllocationStrategy spotAllocationStrategy, BillCalculationStrategy billCalculationStrategy) {

@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InitService {
+
+    private static int parkingLotId ;
     private GateRepository gateRepository;
     private ParkingFloorRepository parkingFloorRepository;
     private ParkingLotRepository parkingLotRepository;
@@ -28,12 +30,12 @@ public class InitService {
     public ParkingLot init() {
         System.out.println("*******  Parking Lot Initialization  *******");
 
-        ParkingLot parkingLot = new ParkingLot();
+        ParkingLot parkingLot = new ParkingLot(++parkingLotId);
         parkingLot.setName("GTA PARKING LOT");
         parkingLot.setAddress("Vice City");
         parkingLot.setParkingLotStatus(ParkingLotStatus.OPEN);
         parkingLot.setCapacity(100);
-        parkingLot.setVehicleTypeList(List.of(VehicleType.CAR, VehicleType.BIKE));
+        parkingLot.setVehicleTypeList(List.of(VehicleType.LUXURY, VehicleType.ELECTRIC, VehicleType.HANDICAPPED, VehicleType.GENERAL));
 
         List<ParkingFloor> parkingFloorList = new ArrayList<>();
 
@@ -45,20 +47,24 @@ public class InitService {
             List<ParkingSpot> parkingSpotList = new ArrayList<>();
             for (int j = 1; j <= 10; j++) {
                 ParkingSpot parkingSpot;
-                if (j == 1) {
-                    parkingSpot = new HandicapSpot();
-                } else if (j == 5) {
-                    parkingSpot = new EVSpot();
-                } else if (i == 1 && j != 1 && j != 5) {
+                if (i == 1) {
                     parkingSpot = new LuxurySpot();
-                } else {
+                    parkingSpot.setVehicleType(VehicleType.LUXURY);
+                }
+                else if (j == 1 && i != 1) {
+                    parkingSpot = new HandicapSpot();
+                    parkingSpot.setVehicleType(VehicleType.HANDICAPPED);
+                } else if (j == 5 && i != 1) {
+                    parkingSpot = new EVSpot();
+                    parkingSpot.setVehicleType(VehicleType.ELECTRIC);
+                }  else {
                     parkingSpot = new ParkingSpot();
+                    parkingSpot.setVehicleType(VehicleType.GENERAL);
                 }
 
                 parkingSpot.setId((i * 100) + j);
                 parkingSpot.setSpotNo((i * 100) + j);
                 parkingSpot.setParkingSpotStatus(ParkingSpotStatus.EMPTY);
-                parkingSpot.setVehicleType(VehicleType.CAR);
                 parkingSpotList.add(parkingSpot);
                 parkingSpotRepository.add(parkingSpot);
             }
@@ -69,7 +75,7 @@ public class InitService {
             gateRepository.add(entryGate);
 
             Gate exitGate = new Gate(GateType.EXIT, (i * 1000) + 2, GateStatus.OPEN);
-            parkingFloor.setEntryGate(exitGate);
+            parkingFloor.setExitGate(exitGate);
             gateRepository.add(exitGate);
 
             parkingFloorList.add(parkingFloor);

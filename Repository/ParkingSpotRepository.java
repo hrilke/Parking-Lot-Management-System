@@ -22,4 +22,9 @@ public class ParkingSpotRepository {
         }
         return newParkingSpot;
     }
+
+    public void saveChanges(ParkingSpot parkingSpot) {
+        parkingSpotHashMap.put(parkingSpot.getId(), parkingSpot);
+        System.out.println("Parking Spot Number" + parkingSpot.getSpotNo() + "Has been allotted to you");
+    }
 }

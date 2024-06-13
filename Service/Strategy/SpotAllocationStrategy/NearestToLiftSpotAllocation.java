@@ -16,7 +16,7 @@ public class NearestToLiftSpotAllocation implements SpotAllocationStrategy {
         for (ParkingFloor parkingFloor : parkingFloorList) {
             List<ParkingSpot> parkingSpotList = parkingFloor.getSpotList();
             int n = parkingSpotList.size();
-            for (int i = 0; i < n; i--) {
+            for (int i = 0; i < n; i++) {
                 ParkingSpot spot = parkingSpotList.get(i);
                 if (spot.getParkingSpotStatus().equals(ParkingSpotStatus.EMPTY)
                     && spot.getVehicleType().equals(vehicle.getVehicleType())) {
