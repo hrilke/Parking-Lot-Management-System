@@ -30,9 +30,10 @@ public class SpecialSpotAllocation implements SpotAllocationStrategy {
         }
         else if (vehicle.getVehicleType() == VehicleType.LUXURY) {
             List<ParkingSpot> spots = parkingLot.getFloorList().get(0).getSpotList();
-            for (ParkingSpot parkingSpot : spots) {
-                if (parkingSpot.getParkingSpotStatus().equals(ParkingSpotStatus.EMPTY)) {
-                    return parkingSpot;
+            for (ParkingSpot spot : spots) {
+                if (spot.getParkingSpotStatus().equals(ParkingSpotStatus.EMPTY)
+                  && spot.getClass().equals(LuxurySpot.class)) {
+                    return spot;
                 }
             }
         }

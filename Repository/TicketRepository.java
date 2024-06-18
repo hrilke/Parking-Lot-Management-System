@@ -12,7 +12,7 @@ public class TicketRepository {
         this.ticketHashMap = new HashMap<>();
     }
 
-    public Ticket add(Ticket ticket) { //TO DO : Find out Why we need to return ticket after adding
+    public Ticket add(Ticket ticket) {
         ticket.setId(++idCounter);
         ticketHashMap.put(ticket.getId(), ticket);
         System.out.println("Collect your ticket");
