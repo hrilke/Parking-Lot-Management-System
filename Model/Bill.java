@@ -1,6 +1,8 @@
 package Model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 public class Bill extends BaseClass{
     private Double amount;
@@ -16,6 +18,19 @@ public class Bill extends BaseClass{
         this.exitTime = exitTime;
         this.ticket = ticket;
         this.exitGate = exitGate;
+    }
+
+    @Override
+    public String toString() {
+        return "Bill{" +
+                "amount=" + amount +
+                ", entryTime=" + ticket.getEntryTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)) +
+                ", exitTime=" + exitTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)) +
+                ", ticketId=" + ticket.getId() +
+                ", Vehicle=" + ticket.getVehicle().getRegistrationNumber() +
+                ", exitGate=" + exitGate.getGateNum() +
+                ", id=" + id +
+                '}';
     }
 
     public Double getAmount() {

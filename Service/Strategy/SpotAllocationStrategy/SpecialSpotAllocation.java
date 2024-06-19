@@ -13,6 +13,7 @@ public class SpecialSpotAllocation implements SpotAllocationStrategy {
 
         if (vehicle.getVehicleType() == VehicleType.ELECTRIC) {
             for (ParkingFloor parkingFloor : floors) {
+                if (parkingFloor.getFloorNo() == 1) continue;
                 ParkingSpot spot = parkingFloor.getSpotList().get(4);
                 if (spot.getParkingSpotStatus().equals(ParkingSpotStatus.EMPTY)) {
                     return spot;

@@ -5,7 +5,7 @@ public class BillCalculationStrategyFactory {
     public BillCalculationStrategyFactory(BillingCalculationStrategyName name) {
     }
 
-    public BillCalculationStrategy getBillCalculationStrategy(BillingCalculationStrategyName name) {
+    public static BillCalculationStrategy getBillCalculationStrategy(BillingCalculationStrategyName name) {
         switch (name) {
             case BASE_CHARGE : return new BaseChargeBillStrategy();
             case TIME_BASED_CHARGES: return new TimeBasedChargeBillStrategy();

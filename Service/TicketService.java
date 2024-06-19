@@ -29,6 +29,7 @@ public class TicketService {
     }
 
     public Ticket generateTicket(Vehicle vehicle, int GateNumber, int parkingLotId, SpotAllocationStrategyName strategy){
+
         SpotAllocationStrategy spotAllocationStrategy = SpotAllocationStrategyFactory.getSpotAllocationStartegy(strategy);
         ParkingLot parkingLot = parkingLotRepository.get(parkingLotId);
         ParkingSpot allocatedSpot = spotAllocationStrategy.allocateSpot(vehicle,parkingLot);
@@ -42,7 +43,7 @@ public class TicketService {
         ticket.setEntryTime(LocalDateTime.now());
         ticket.setParkingSpot(allocatedSpot);
         ticket.setEntryGate(gateRepository.get(GateNumber));
-
         return ticketRepository.add(ticket);
     }
+
 }

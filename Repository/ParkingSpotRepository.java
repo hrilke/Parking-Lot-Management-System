@@ -25,6 +25,6 @@ public class ParkingSpotRepository {
 
     public void saveChanges(ParkingSpot parkingSpot) {
         parkingSpotHashMap.put(parkingSpot.getId(), parkingSpot);
-        System.out.println("Parking Spot Number" + parkingSpot.getSpotNo() + "Has been allotted to you");
+        System.out.println("Parking Spot Number " + parkingSpot.getSpotNo() + " has been allotted to you");
     }
 }

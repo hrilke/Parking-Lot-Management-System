@@ -16,7 +16,9 @@ public class ParkingLotRepository {
     public void add(ParkingLot parkingLot){
         parkingLot.setId(++idCounter);
         parkingLotHashMap.put(parkingLot.getId(), parkingLot);
-        System.out.println("Parking Lot "+ parkingLot.getName() +" Has been Initialized to the Database");
+        System.out.println("Parking Lot "+ parkingLot.getName() +" Has been Initialized to the Database"
+                            + " \n- - - - - - - - ");
+
     }
     public ParkingLot get(int parkingLotId){
         ParkingLot newParkingLot = parkingLotHashMap.get(parkingLotId);

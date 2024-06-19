@@ -23,12 +23,13 @@ public class Ticket extends BaseClass{
 
     @Override
     public String toString() {
-        return "{" +
-                ",\nticketId=" + getId() +
-                ", \nparkingSpot=" + parkingSpot +
+        return '{' +
+                " \nticketId=" + getId() +
+                ", \nparkingSpot=" + parkingSpot.getSpotNo() +
                 ", \nvehicle=" + vehicle.getRegistrationNumber() +
                 ", \nentryTime=" + DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").format(entryTime) +
                 ", \nentryGate=" + entryGate.getGateNum() +
+                " \n" +
                 '}';
     }
 
