@@ -1,6 +1,3 @@
-BIll calculation Strategy
-    1. Based on time
-    2. Based on time + Load factor based pricing
-Implement PaymentService
-Occupancy Percentage and Calculations on indicator
+Derive main class for understandable commands for user.
 Learn About Software Testing and its application into the project
+Create ReadMe file and update project details in github repo

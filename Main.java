@@ -13,7 +13,7 @@ import Service.Strategy.BillCalculationStrategy.BillingCalculationStrategyName;
 import Service.Strategy.SpotAllocationStrategy.SpotAllocationStrategyName;
 import Service.TicketService;
 
-import java.time.LocalDateTime;
+
 
 public class Main {
 
@@ -66,16 +66,16 @@ public class Main {
         Ticket ticket3 = ticketController.generateTicket(vehicle3,1001,1, SpotAllocationStrategyName.LINEAR);
         System.out.println( ticket3.toString());
 
-        Bill bill = billController.generateBill(ticket, ticket.getEntryTime().plusMinutes(70), BillingCalculationStrategyName.BASE_CHARGE,1, 1002);
+        Bill bill = billController.generateBill(ticket, ticket.getEntryTime().plusMinutes(70), BillingCalculationStrategyName.AGGRESSIVE_BUSINESS_CHARGE,parkingLotRepository.get(1), 1002);
         System.out.println(bill.toString());
 
-        Bill bill1 = billController.generateBill(ticket1, ticket.getEntryTime().plusMinutes(243), BillingCalculationStrategyName.TIME_BASED_CHARGES,1,1002);
+        Bill bill1 = billController.generateBill(ticket1, ticket.getEntryTime().plusMinutes(243), BillingCalculationStrategyName.AGGRESSIVE_BUSINESS_CHARGE,parkingLotRepository.get(1),1002);
         System.out.println(bill1.toString());
 
-        Bill bill2 = billController.generateBill(ticket2, ticket.getEntryTime().plusMinutes(80), BillingCalculationStrategyName.BASE_CHARGE,1,1002);
+        Bill bill2 = billController.generateBill(ticket2, ticket.getEntryTime().plusMinutes(80), BillingCalculationStrategyName.AGGRESSIVE_BUSINESS_CHARGE,parkingLotRepository.get(1),1002);
         System.out.println(bill2.toString());
 
-        Bill bill3 = billController.generateBill(ticket3, ticket.getEntryTime().plusMinutes(129), BillingCalculationStrategyName.TIME_BASED_CHARGES,1,1002);
+        Bill bill3 = billController.generateBill(ticket3, ticket.getEntryTime().plusMinutes(129), BillingCalculationStrategyName.AGGRESSIVE_BUSINESS_CHARGE,parkingLotRepository.get(1),1002);
         System.out.println(bill3.toString());
     }
 }

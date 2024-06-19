@@ -3,6 +3,7 @@ package Service;
 import Controller.TicketController;
 import Model.Bill;
 import Model.Gate;
+import Model.ParkingLot;
 import Model.Ticket;
 import Repository.BillRepository;
 import Repository.GateRepository;
@@ -23,9 +24,9 @@ public class BillService {
         this.gateRepository = gateRepository;
     }
 
-    public Bill generateBill(Ticket ticket, LocalDateTime exitTime, BillingCalculationStrategyName name, int parkingLot, int exitGateId){
-        BillCalculationStrategy billCalculationStrategy = BillCalculationStrategyFactory.getBillCalculationStrategy(name);
-        Double amount = billCalculationStrategy.getAmount(ticket,exitTime,parkingLot);
+    public Bill generateBill(Ticket ticket, LocalDateTime exitTime, BillingCalculationStrategyName name, ParkingLot parkingLot, int exitGateId){
+        BillCalculationStrategy billCalculationStrategy = BillCalculationStrategyFactory.getBillCalculationStrategy(name, parkingLot);
+        Double amount = billCalculationStrategy.getAmount(ticket,exitTime);
 
         Bill bill = new Bill();
         bill.setAmount(amount);

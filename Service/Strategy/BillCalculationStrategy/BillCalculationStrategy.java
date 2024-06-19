@@ -1,6 +1,7 @@
 package Service.Strategy.BillCalculationStrategy;
 
 import Model.Bill;
+import Model.ParkingLot;
 import Model.Ticket;
 
 import java.time.LocalDateTime;
@@ -15,5 +16,5 @@ public interface BillCalculationStrategy {
     public final double timedEVCharge = 20.00;
     public final double timedHandicappedCharge = 20.00;
     public final double timedGeneralCharge = 50.00;
-    public Double getAmount(Ticket ticket, LocalDateTime exitTime, int parkingLot);
+    public double getAmount(Ticket ticket, LocalDateTime exitTime);
 }
