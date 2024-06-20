@@ -4,6 +4,8 @@ import Model.ENUM.PaymentMode;
 import Model.ENUM.PaymentStatus;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 public class Payment extends BaseClass{
     private Bill bill;
@@ -13,15 +15,22 @@ public class Payment extends BaseClass{
     private PaymentStatus paymentStatus;
     private LocalDateTime timeOfPayment;
 
-    public Payment(Bill bill, Double amount, PaymentMode paymentMode, String referenceNum, PaymentStatus paymentStatus, LocalDateTime timeOfPayment) {
-        this.bill = bill;
-        this.amount = amount;
-        this.paymentMode = paymentMode;
-        this.referenceNum = referenceNum;
-        this.paymentStatus = paymentStatus;
-        this.timeOfPayment = timeOfPayment;
+    @Override
+    public String toString() {
+        return "Payment Receipt{" +
+                ", \nPaymentId = " + id +
+                ", \nBillId = " + bill.getId() +
+                ", \namount = " + amount +
+                ", \npaymentMode = " + paymentMode +
+                ", \nreferenceNum = " + referenceNum  +
+                ", \npaymentStatus = " + paymentStatus +
+                ", \ntimeOfPayment = " + timeOfPayment.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)) +
+                "  \n- - - - - -" +
+                '}';
     }
 
+    public Payment() {
+    }
     public Bill getBill() {
         return bill;
     }

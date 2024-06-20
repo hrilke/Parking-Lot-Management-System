@@ -2,6 +2,7 @@ package Model;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 public class Ticket extends BaseClass{
     private ParkingSpot parkingSpot;
@@ -23,14 +24,27 @@ public class Ticket extends BaseClass{
 
     @Override
     public String toString() {
-        return '{' +
-                " \nticketId=" + getId() +
-                ", \nparkingSpot=" + parkingSpot.getSpotNo() +
-                ", \nvehicle=" + vehicle.getRegistrationNumber() +
-                ", \nentryTime=" + DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").format(entryTime) +
-                ", \nentryGate=" + entryGate.getGateNum() +
-                " \n" +
+        return "Ticket{" +
+                " \nticketId = " + getId() +
+                ", \nparkingSpot = " + parkingSpot.getSpotNo() +
+                ", \nStaff_Help = " + getStaffName(parkingSpot) +
+                ", \nvehicle = " + vehicle.getRegistrationNumber() +
+                ", \nentryTime = " + entryTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)) +
+                ", \nentryGate = " + entryGate.getGateNum() +
+                " \n- - - - - -" +
                 '}';
+    }
+    private static String getStaffName(ParkingSpot parkingSpot){
+        if (parkingSpot.getClass().equals(HandicapSpot.class)) {
+            return ((HandicapSpot) parkingSpot).getWheelchairHelper().getName();
+        }
+        else if (parkingSpot.getClass().equals(EVSpot.class)) {
+            return ((EVSpot) parkingSpot).getEvStationStaff().getName();
+        }
+        else if (parkingSpot.getClass().equals(LuxurySpot.class)) {
+            return ((LuxurySpot) parkingSpot).getSecurityGuard().getName();
+        }
+        return "Not Applicable";
     }
 
     public Gate getEntryGate() {

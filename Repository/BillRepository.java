@@ -1,6 +1,6 @@
 package Repository;
 
-import Exception.TicketNotFoundException;
+import Exception.BillNotFoundException;
 import Model.Bill;
 
 import java.util.HashMap;
@@ -20,10 +20,10 @@ public class BillRepository {
         return billHashMap.get(idCounter);
     }
 
-    public Bill get(int billId){
+    public Bill get(int billId)  {
         Bill bill = billHashMap.get(billId);
         if (bill == null) {
-            throw new TicketNotFoundException("Bill not found for id: "+ billId);
+            throw new BillNotFoundException("Bill not found for id: "+ billId);
         }
         return bill;
     }

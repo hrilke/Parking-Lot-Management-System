@@ -23,13 +23,14 @@ public class Bill extends BaseClass{
     @Override
     public String toString() {
         return "Bill{" +
-                "amount=" + amount +
-                ", entryTime=" + ticket.getEntryTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)) +
-                ", exitTime=" + exitTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)) +
-                ", ticketId=" + ticket.getId() +
-                ", Vehicle=" + ticket.getVehicle().getRegistrationNumber() +
-                ", exitGate=" + exitGate.getGateNum() +
-                ", id=" + id +
+                ", \nid = " + id +
+                ", \namount = " + amount +
+                ", \nentryTime = " + ticket.getEntryTime().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)) +
+                ", \nexitTime = " + exitTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)) +
+                ", \nticketId = " + ticket.getId() +
+                ", \nVehicle = " + ticket.getVehicle().getRegistrationNumber() +
+                ", \nexitGate = " + exitGate.getGateNum() +
+                " \n- - - - - - " +
                 '}';
     }
 

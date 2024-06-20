@@ -15,8 +15,8 @@ public class BillController {
         this.billService = billService;
     }
 
-    public Bill generateBill(Ticket ticket, LocalDateTime exitTime, BillingCalculationStrategyName name, ParkingLot parkingLot, int exitGateId){
+    public Bill generateBill(int ticketId,  int parkingLotId, int exitGateId,BillingCalculationStrategyName billStrategyName){
 
-        return billService.generateBill(ticket,exitTime,name,parkingLot,exitGateId);
+        return billService.generateBill(ticketId, parkingLotId, exitGateId, billStrategyName);
     }
 }

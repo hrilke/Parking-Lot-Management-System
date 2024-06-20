@@ -8,7 +8,7 @@ public class HandicapSpot extends ParkingSpot{
    private Staff wheelchairHelper;
    private static int idCounter = 0;
    public HandicapSpot() {
-      this.wheelchairHelper = new Staff("Helper"+idCounter++, StaffSkill.WHEELCHAIR_STAFF);
+      this.wheelchairHelper = new Staff("Wheel Chair Helper"+ ++idCounter, StaffSkill.WHEELCHAIR_STAFF);
    }
 
    public HandicapSpot(int spotNo, VehicleType vehicleType, ParkingSpotStatus parkingSpotStatus, Model.Vehicle vehicle, Staff wheelchairHelper) {

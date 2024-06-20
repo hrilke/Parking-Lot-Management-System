@@ -7,9 +7,9 @@ import Model.ENUM.VehicleType;
 public class LuxurySpot extends ParkingSpot{
     private Staff SecurityGuard;
 
-
+    private static int idCounter = 0;
     public LuxurySpot() {
-        SecurityGuard = new Staff("Security Guard", StaffSkill.SECURITY_STAFF);
+        SecurityGuard = new Staff("Security Guard"+ ++idCounter, StaffSkill.SECURITY_STAFF);
     }
 
     public LuxurySpot(int spotNo, VehicleType vehicleType, ParkingSpotStatus parkingSpotStatus, Model.Vehicle vehicle, Staff securityGuard) {
