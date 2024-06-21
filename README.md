@@ -2,9 +2,9 @@
 
 
 
-### Class Diagram : link to be added
+### Class Diagram :
 
-![User defined Board size, players, symbols]()
+![User defined Board size, players, symbols](https://github.com/hrilke/Parking-Lot-Management-System/blob/master/Class%20Diagram.puml)
 
 ## Features
 
@@ -33,7 +33,7 @@ Dynamic Spot Allocation: Determines the optimal parking spot based on customer n
 
 ## Screenshots
 
-![User defined Board size, players, symbols]()
+![User defined Board size, players, symbols](https://github.com/hrilke/Parking-Lot-Management-System/blob/master/Screenshots.png)
 
 
 ## Tech Stack
