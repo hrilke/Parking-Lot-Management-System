@@ -1,31 +1,29 @@
 # Parking Lot Management System
 
 
-
 ### Class Diagram :
 
-![User defined Board size, players, symbols](https://github.com/hrilke/Parking-Lot-Management-System/blob/master/Class%20Diagram.puml)
+![User defined Board size, players, symbols](https://github.com/hrilke/Parking-Lot-Management-System/blob/master/Class%20Diagram.png)
 
 ## Features
 
 ### 1. Parking Spot Management:
 - Regular Parking: General parking spots for standard vehicles.
 - EV Charging Spots: Dedicated spots equipped with EV charging facilities.
-- Reserved Spots: Designated parking areas reserved for handicapped drivers.
-- Special Security Spots: Enhanced security measures for luxury and high-class vehicles.
+- Reserved Spots: Designated parking areas reserved for handicapped drivers with wheelchair accessibility.
+- Special Security Spots: Dedicated security personnel for luxury and high-class vehicles.
 
 ### 2. Algorithm for Spot Allocation:
 Dynamic Spot Allocation: Determines the optimal parking spot based on customer needs such as:
-- Proximity to EV charging stations.
+- Proximity to reserve spots with diverse types of parking spots(Luxury, Handicapped, Electric Vehicle).
 - Nearness to elevators or lifts.
 - Accessibility to exits for quick departure.
-- Dynamic Business Strategies:
 
 ### 3. Real-time Pricing: Calculates parking charges dynamically based on:
-- Current occupancy levels.
-- Availability of different types of parking spots.
 - Flexible Pricing: Adjusts pricing strategies to optimize revenue and encourage efficient use of parking resources.
-- Automated Pricing Updates: Reflects changes in pricing based on demand and availability.
+- Base Charge only : Customers are charged a flat fee irrespective of how long they park
+- Base Charge + Time Charge : Combines a fixed base charge with an additional charge based on the time parked.
+- Base Charge + Time Charge + Surge charge : Includes a fixed time charge and adjusts the base charge dynamically based on demand (surge pricing).  
 
 ### 4. Vehicle Tracking and Security:
 - Security Measures: Implements enhanced security protocols for luxury vehicles.
@@ -43,6 +41,10 @@ Dynamic Spot Allocation: Determines the optimal parking spot based on customer n
 - Version Control : Git
 
 - Editor : IntelliJ
+
+- Data Storage : In-Memory using HashMaps
+
+- Diagrams : PlantUML
 
 ## Lessons Learned
 
