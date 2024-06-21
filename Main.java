@@ -72,7 +72,8 @@ public class Main {
                 System.out.println("Select and Choose Parking Spot Category" +
                         "\n 1 : HANDICAPPED CATEGORY " +
                         "\n 2 : LUXURY CATEGORY " +
-                        "\n 3 : ELECTRIC VEHICLE CATEGORY");
+                        "\n 3 : ELECTRIC VEHICLE CATEGORY"+
+                        "\n 4 : GENERAL");
                 int type = sc.nextInt();
                 VehicleType vehicleType = VehicleType.GENERAL;
                 if (type == 1) vehicleType = VehicleType.HANDICAPPED;
@@ -80,7 +81,7 @@ public class Main {
                 else if (type == 3) vehicleType = VehicleType.ELECTRIC;
                 SpotAllocationStrategyName strategyName = SpotAllocationStrategyName.SPECIAL_VEHICLE;
                 if (vehicleType == VehicleType.GENERAL) {
-                    System.out.println("Select Parking Spot Preference" +
+                    System.out.println("Select Preferred Parking Spot" +
                             "\n 1 : NEAR LIFT " +
                             "\n 2 : NEAR EXIT " +
                             "\n 3 : ANYWHERE");
@@ -100,7 +101,8 @@ public class Main {
                 System.out.println(bill.toString());
                 System.out.println("Select Payment Mode to Make Payment" +
                                     " \n 1 : UPI" +
-                                    " \n 2 : CARD" );
+                                    " \n 2 : CARD" +
+                                    " \n 3 : CASH");
                 int paymentType = sc.nextInt();
                 PaymentMode paymentMode = PaymentMode.CASH;
                 if (paymentType == 1) paymentMode = PaymentMode.UPI;
