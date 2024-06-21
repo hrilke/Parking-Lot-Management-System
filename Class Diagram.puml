@@ -1,0 +1,717 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": false,
+    "cutInterfaceStructures": false,
+    "cutDataStructures": false,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 6,
+    "backwardDepth": 6,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 2,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "Model.BaseClass",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_1664073796 { 
+   	label=Controller
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   InitController1664073796[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)InitController</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   initService: InitService [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ init(): ParkingLot</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+PaymentController1664073796[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)PaymentController</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   paymentService: PaymentService [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ makePayment(bill: Bill, referenceNumber: String, paymentMode: PaymentMode): Payment</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_1852442515 { 
+   	label=Strategy
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_324980826 { 
+   	label=BillCalculationStrategy
+	labeljust=l
+	fillcolor="#d8d8d8"
+	style=filled
+   
+   AggressiveBillStrategy866590867[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)AggressiveBillStrategy</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   capacity: double [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   occupancy: double [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   parkingLot: ParkingLot [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- calculateAmount(vehicleType: VehicleType, entryTime: LocalDateTime, exitTime: LocalDateTime): double</TD></TR>
+<TR><TD ALIGN="LEFT" >- calculateSurgeAmount(baseAmount: double): double</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getAmount(ticket: Ticket, exitTime: LocalDateTime): double</TD></TR>
+<TR><TD ALIGN="LEFT" >- getOccupancy(parkingLot: ParkingLot): double</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+BaseChargeBillStrategy866590867[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)BaseChargeBillStrategy</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ getAmount(ticket: Ticket, exitTime: LocalDateTime): double</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+TimeBasedChargeBillStrategy866590867[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)TimeBasedChargeBillStrategy</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- calculateAmount(vehicleType: VehicleType, entryTime: LocalDateTime, exitTime: LocalDateTime): double</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getAmount(ticket: Ticket, exitTime: LocalDateTime): double</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_913639920 { 
+   	label=SpotAllocationStrategy
+	labeljust=l
+	fillcolor="#d8d8d8"
+	style=filled
+   
+   LinearSpotAllocation238374551[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)LinearSpotAllocation</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ allocateSpot(vehicle: Vehicle, parkingLot: ParkingLot): ParkingSpot</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+NearestToExitSpotAllocation238374551[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)NearestToExitSpotAllocation</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ allocateSpot(vehicle: Vehicle, parkingLot: ParkingLot): ParkingSpot</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+NearestToLiftSpotAllocation238374551[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)NearestToLiftSpotAllocation</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ allocateSpot(vehicle: Vehicle, parkingLot: ParkingLot): ParkingSpot</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+SpecialSpotAllocation238374551[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)SpecialSpotAllocation</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ allocateSpot(vehicle: Vehicle, parkingLot: ParkingLot): ParkingSpot</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+} 
+
+subgraph cluster_350701718 { 
+   	label=Repository
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   BillRepository350701718[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)BillRepository</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   billHashMap: HashMap&lt;Integer, Bill&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ add(bill: Bill): Bill</TD></TR>
+<TR><TD ALIGN="LEFT" >+ get(billId: int): Bill</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+GateRepository350701718[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)GateRepository</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   gateHashMap: HashMap&lt;Integer, Gate&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ add(gate: Gate)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ get(gateNumber: int): Gate</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+ParkingFloorRepository350701718[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)ParkingFloorRepository</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   parkingFloorHashMap: HashMap&lt;Integer, ParkingFloor&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ add(parkingFloor: ParkingFloor)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ get(parkingFloorId: int): ParkingFloor</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+ParkingLotRepository350701718[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)ParkingLotRepository</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   parkingLotHashMap: HashMap&lt;Integer, ParkingLot&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ add(parkingLot: ParkingLot)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ get(parkingLotId: int): ParkingLot</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+ParkingSpotRepository350701718[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)ParkingSpotRepository</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   parkingSpotHashMap: HashMap&lt;Integer, ParkingSpot&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ add(parkingSpot: ParkingSpot)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ get(parkingSpotId: int): ParkingSpot</TD></TR>
+<TR><TD ALIGN="LEFT" >+ saveChanges(parkingSpot: ParkingSpot)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+PaymentRepository350701718[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)PaymentRepository</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   paymentHashMap: HashMap&lt;Integer, Payment&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ add(payment: Payment): Payment</TD></TR>
+<TR><TD ALIGN="LEFT" >+ get(paymentId: int): Payment</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+TicketRepository350701718[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)TicketRepository</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   ticketHashMap: HashMap&lt;Integer, Ticket&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ add(ticket: Ticket): Ticket</TD></TR>
+<TR><TD ALIGN="LEFT" >+ get(ticketId: int): Ticket</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_646160747 { 
+   	label=Service
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   BillService646160747[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)BillService</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   billRepository: BillRepository [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   gateRepository: GateRepository [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   parkingLotRepository: ParkingLotRepository [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   ticketRepository: TicketRepository [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ generateBill(ticketId: int, parkingLotId: int, exitGateId: int, name: BillingCalculationStrategyName): Bill</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+InitService646160747[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)InitService</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   gateRepository: GateRepository [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   parkingFloorRepository: ParkingFloorRepository [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   parkingLotRepository: ParkingLotRepository [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   parkingSpotRepository: ParkingSpotRepository [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ init(): ParkingLot</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+PaymentService646160747[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)PaymentService</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   paymentRepository: PaymentRepository [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ makePayment(bill: Bill, referenceNumber: String, paymentMode: PaymentMode): Payment</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+TicketService646160747[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)TicketService</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   gateRepository: GateRepository [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   parkingLotRepository: ParkingLotRepository [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   parkingSpotRepository: ParkingSpotRepository [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   ticketRepository: TicketRepository [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ generateTicket(vehicle: Vehicle, GateNumber: int, parkingLotId: int, strategy: SpotAllocationStrategyName): Ticket</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_74517257 { 
+   	label=Model
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   BaseClass74517257[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)BaseClass</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   createdAt: LocalDateTime [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   createdBy: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   id: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   updatedAt: LocalDateTime [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   updatedBy: String [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Bill74517257[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Bill</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   amount: Double [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   exitGate: Gate [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   exitTime: LocalDateTime [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   ticket: Ticket [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+EVSpot74517257[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)EVSpot</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   evStationStaff: Staff [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Gate74517257[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Gate</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   gateNum: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   gateStatus: GateStatus [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   gateType: GateType [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   operator: Staff [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+HandicapSpot74517257[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)HandicapSpot</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   wheelchairHelper: Staff [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+LuxurySpot74517257[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)LuxurySpot</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   SecurityGuard: Staff [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+ParkingFloor74517257[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)ParkingFloor</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   entryGate: Gate [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   exitGate: Gate [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   floorNo: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   parkingFloorStatus: ParkingFloorStatus [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   spotList: List&lt;ParkingSpot&gt; [0..*]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+ParkingLot74517257[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)ParkingLot</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   address: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   billCalculationStrategy: BillCalculationStrategy [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   capacity: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   floorList: List&lt;ParkingFloor&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   name: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   parkingLotStatus: ParkingLotStatus [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   spotAllocationStrategy: SpotAllocationStrategy [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   vehicleTypeList: List&lt;VehicleType&gt; [0..*]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+ParkingSpot74517257[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)ParkingSpot</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   Vehicle: Vehicle [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   parkingSpotStatus: ParkingSpotStatus [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   spotNo: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   vehicleType: VehicleType [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Payment74517257[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Payment</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   amount: Double [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   bill: Bill [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   paymentMode: PaymentMode [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   paymentStatus: PaymentStatus [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   referenceNum: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   timeOfPayment: LocalDateTime [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Staff74517257[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Staff</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   name: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   skill: StaffSkill [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Ticket74517257[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Ticket</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   entryGate: Gate [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   entryTime: LocalDateTime [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   parkingSpot: ParkingSpot [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   vehicle: Vehicle [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- getStaffName(parkingSpot: ParkingSpot): String</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Vehicle74517257[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Vehicle</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   registrationNumber: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   vehicleType: VehicleType [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+'edges    
+AggressiveBillStrategy866590867 -> BaseChargeBillStrategy866590867[arrowhead=none];
+AggressiveBillStrategy866590867 -> ParkingLot74517257[label="parkingLot
+[0..1]"];
+AggressiveBillStrategy866590867 -> TimeBasedChargeBillStrategy866590867[arrowhead=none];
+BaseClass74517257 -> Bill74517257[arrowhead=none, arrowtail=empty, dir=both];
+BaseClass74517257 -> Gate74517257[arrowhead=none, arrowtail=empty, dir=both];
+BaseClass74517257 -> ParkingFloor74517257[arrowhead=none, arrowtail=empty, dir=both];
+BaseClass74517257 -> ParkingLot74517257[arrowhead=none, arrowtail=empty, dir=both];
+BaseClass74517257 -> ParkingSpot74517257[arrowhead=none, arrowtail=empty, dir=both];
+BaseClass74517257 -> Payment74517257[arrowhead=none, arrowtail=empty, dir=both];
+BaseClass74517257 -> Ticket74517257[arrowhead=none, arrowtail=empty, dir=both];
+BaseClass74517257 -> Vehicle74517257[arrowhead=none, arrowtail=empty, dir=both];
+Bill74517257 -> Gate74517257[label="exitGate
+[0..1]"];
+Bill74517257 -> Ticket74517257[label="ticket
+[0..1]"];
+BillRepository350701718 -> Bill74517257[label="billHashMap
+[0..*]"];
+BillService646160747 -> GateRepository350701718[label="gateRepository
+[0..1]"];
+BillService646160747 -> ParkingLotRepository350701718[label="parkingLotRepository
+[0..1]"];
+BillService646160747 -> TicketRepository350701718[label="ticketRepository
+[0..1]"];
+EVSpot74517257 -> Staff74517257[label="evStationStaff
+[0..1]"];
+Gate74517257 -> Staff74517257[label="operator
+[0..1]"];
+GateRepository350701718 -> Gate74517257[label="gateHashMap
+[0..*]"];
+HandicapSpot74517257 -> Staff74517257[label="wheelchairHelper
+[0..1]"];
+InitController1664073796 -> InitService646160747[label="initService
+[0..1]"];
+InitService646160747 -> GateRepository350701718[label="gateRepository
+[0..1]"];
+InitService646160747 -> ParkingFloorRepository350701718[label="parkingFloorRepository
+[0..1]"];
+InitService646160747 -> ParkingLotRepository350701718[label="parkingLotRepository
+[0..1]"];
+InitService646160747 -> ParkingSpotRepository350701718[label="parkingSpotRepository
+[0..1]"];
+LuxurySpot74517257 -> Staff74517257[label="SecurityGuard
+[0..1]"];
+ParkingFloor74517257 -> Gate74517257[label="entryGate
+[0..1]"];
+ParkingFloor74517257 -> Gate74517257[label="exitGate
+[0..1]"];
+ParkingFloor74517257 -> ParkingSpot74517257[label="spotList
+[0..*]"];
+ParkingFloorRepository350701718 -> ParkingFloor74517257[label="parkingFloorHashMap
+[0..*]"];
+ParkingLot74517257 -> AggressiveBillStrategy866590867[arrowhead=none];
+ParkingLot74517257 -> AggressiveBillStrategy866590867[label="billCalculationStrategy
+[0..1]", arrowhead=none];
+ParkingLot74517257 -> BaseChargeBillStrategy866590867[arrowhead=none];
+ParkingLot74517257 -> LinearSpotAllocation238374551[arrowhead=none];
+ParkingLot74517257 -> NearestToExitSpotAllocation238374551[arrowhead=none];
+ParkingLot74517257 -> NearestToLiftSpotAllocation238374551[arrowhead=none];
+ParkingLot74517257 -> ParkingFloor74517257[label="floorList
+[0..*]"];
+ParkingLot74517257 -> SpecialSpotAllocation238374551[arrowhead=none];
+ParkingLot74517257 -> TimeBasedChargeBillStrategy866590867[arrowhead=none];
+ParkingLotRepository350701718 -> ParkingLot74517257[label="parkingLotHashMap
+[0..*]"];
+ParkingSpot74517257 -> EVSpot74517257[arrowhead=none, arrowtail=empty, dir=both];
+ParkingSpot74517257 -> HandicapSpot74517257[arrowhead=none, arrowtail=empty, dir=both];
+ParkingSpot74517257 -> LuxurySpot74517257[arrowhead=none, arrowtail=empty, dir=both];
+ParkingSpot74517257 -> Vehicle74517257[label="Vehicle
+[0..1]"];
+ParkingSpotRepository350701718 -> ParkingSpot74517257[label="parkingSpotHashMap
+[0..*]"];
+Payment74517257 -> Bill74517257[label="bill
+[0..1]"];
+PaymentController1664073796 -> PaymentService646160747[label="paymentService
+[0..1]"];
+PaymentRepository350701718 -> Payment74517257[label="paymentHashMap
+[0..*]"];
+PaymentService646160747 -> PaymentRepository350701718[label="paymentRepository
+[0..1]"];
+Ticket74517257 -> Gate74517257[label="entryGate
+[0..1]"];
+Ticket74517257 -> ParkingSpot74517257[label="parkingSpot
+[0..1]"];
+Ticket74517257 -> Vehicle74517257[label="vehicle
+[0..1]"];
+TicketRepository350701718 -> Ticket74517257[label="ticketHashMap
+[0..*]"];
+TicketService646160747 -> GateRepository350701718[label="gateRepository
+[0..1]"];
+TicketService646160747 -> ParkingLotRepository350701718[label="parkingLotRepository
+[0..1]"];
+TicketService646160747 -> ParkingSpotRepository350701718[label="parkingSpotRepository
+[0..1]"];
+TicketService646160747 -> TicketRepository350701718[label="ticketRepository
+[0..1]"];
+    
+}
+@enduml
